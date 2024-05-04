@@ -21,7 +21,7 @@ stages:
       md5: d98e8f2eca228c11c4de1cc96866a54d
       size: 91998
   split_data:
-    cmd: python src/split_data.py  --config=params.yaml
+    cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/raw/winequality.csv
       hash: md5
@@ -40,3 +40,35 @@ stages:
       hash: md5
       md5: 4bccf4d668cdc60115de42ba74d416ab
       size: 73633
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_winequality.csv
+      hash: md5
+      md5: 01718da3bd6e206060ed00667ca1a389
+      size: 18510
+    - path: data/processed/train_winequality.csv
+      hash: md5
+      md5: 4bccf4d668cdc60115de42ba74d416ab
+      size: 73633
+    - path: src/train_and_evaluate.py
+      hash: md5
+      md5: a13021c4c47ce25a83807ee2dbc45bfa
+      size: 2809
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.88
+        estimators.ElasticNet.params.l1_ratio: 0.89
+    outs:
+    - path: report/params.json
+      hash: md5
+      md5: 93e348937770bf249f72b4380fd79543
+      size: 43
+    - path: report/scores.json
+      hash: md5
+      md5: 2c184abb30edbdb501e49336be2ad1ec
+      size: 102
+    - path: saved_model/model.joblib
+      hash: md5
+      md5: b665e9e0ae3f0eb1a30baf5a5da29c60
+      size: 1231
