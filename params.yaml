@@ -7,7 +7,7 @@ data_source:
    s3_source: data_given/winequality.csv
   
 
-load_date:
+load_data:
   raw_dataset_csv: data/raw/winequality.csv
 
 split_data:
@@ -18,7 +18,15 @@ split_data:
 estimators:
   ElasticNet:
     params:
-      alpha: 0.88
-      l1_ratio: 0.89
+      # alpha: 0.88
+      # l1_ratio: 0.89
+      alpha: 0.92
+      l1_ratio: 0.78
+
+report:
+  scores:
+    report/scores.json
+  params:
+    report/params.json
   
-model_dir: saved_models
+model_dir: saved_model

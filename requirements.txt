@@ -1,5 +1,11 @@
+#local packages install
+-e .
+
 dvc[gdrive]
 pandas
 numpy
 scikit-learn
 dvc
+pytest
+tox
+flake8
