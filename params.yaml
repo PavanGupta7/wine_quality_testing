@@ -30,3 +30,4 @@ report:
     report/params.json
   
 model_dir: saved_model
+webapp_model_dir: prediction_service/model/model.joblib
