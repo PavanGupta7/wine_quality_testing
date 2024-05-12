@@ -31,17 +31,18 @@ def predict(data):
     print(y_pred)
     return y_pred[0]
 
-def api_response():
+def api_response(request):
     try:
-        data = np.array([list(request.json.value())])
-        print(data)
+        data = request.json if request.json else request.form
+        data = [list(map(float, data.values()))]
         response = predict(data)
-        response = {"response":response}
-        return response
+        response = {"response": response}
+        return jsonify(response)
     except Exception as e:
         print(e)
         error = {"error": "Something went Wrong!"}
-        return error
+        return jsonify(error)
+
 
 
 #creating index root
@@ -51,7 +52,7 @@ def index():
         try:
             if request.form:
                 data = dict(request.form)   #reuquesting all the variables  and storing it in float format
-                data = [list(map(float, data))]
+                data = [list(map(float, data.values()))]
                 response = predict(data)
                 return render_template("index.html", response = response)  
 
