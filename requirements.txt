@@ -1,6 +1,7 @@
 #local packages install
 -e .
 
+importlib-metadata==4.8.3
 dvc[gdrive]
 pandas
 numpy
